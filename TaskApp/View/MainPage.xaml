@@ -2,15 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:TaskApp.Model"
-             x:Class="TaskApp.MainPage">
-
-    <CollectionView>
-        <CollectionView.ItemsSource>
-            <x:Array Type="{x:Type model:ToDoTask}">
-                <model:ToDoTask title="test" description="lallalallalalalallalalal"/>
-                <model:ToDoTask title="test2" description="lallalallalalalallalalal"/>
-            </x:Array>
-        </CollectionView.ItemsSource>
+             xmlns:viewmodel="clr-namespace:TaskApp.ViewModel"
+             x:DataType="viewmodel:ToDoTaskViewModel"
+             x:Class="TaskApp.View.MainPage"
+             Title="{Binding title}">
+    <CollectionView ItemsSource="{Binding toDoTasks}">
 
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="model:ToDoTask">
@@ -20,6 +16,7 @@
                 </VerticalStackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-                
+
     </CollectionView>
+
 </ContentPage>

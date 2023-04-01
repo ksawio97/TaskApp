@@ -15,6 +15,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		builder.Services.AddSingleton<ToDoTaskService>();
+        builder.Services.AddSingleton<ToDoTaskViewModel>();
+        builder.Services.AddSingleton<MainPage>();
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

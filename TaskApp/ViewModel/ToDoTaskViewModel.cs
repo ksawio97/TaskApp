@@ -9,14 +9,22 @@ public class ToDoTaskViewModel : BaseViewModel
 
     public ToDoTaskViewModel(ToDoTaskService toDoTaskService)
     {
-        title = "ToDoTask Finder";
+        title = "ToDoTasks";
         this.toDoTaskService = toDoTaskService;
 
+        GetToDoTasksAsync();
         GetToDoTasksCommand = new Command(async () => await GetToDoTasksAsync());
+        GoToNewTaskPageCommand = new Command(async () => await GoToNewToDoTaskPageAsync());
     }
 
     public Command GetToDoTasksCommand { get; }
-    
+
+    public Command GoToNewTaskPageCommand { get; }
+
+    async Task GoToNewToDoTaskPageAsync()
+    {
+        await Shell.Current.GoToAsync($"{nameof(NewToDoTaskPage)}");
+    }
     async Task GetToDoTasksAsync()
     {
         if (isBusy)

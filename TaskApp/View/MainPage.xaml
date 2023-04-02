@@ -6,17 +6,20 @@
              x:DataType="viewmodel:ToDoTaskViewModel"
              x:Class="TaskApp.View.MainPage"
              Title="{Binding title}">
-    <CollectionView ItemsSource="{Binding toDoTasks}">
+    
+    <Grid RowDefinitions="*, auto">
+        <CollectionView Grid.Row = "0" ItemsSource ="{Binding toDoTasks}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ToDoTask">
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:ToDoTask">
-                <VerticalStackLayout Padding="10" Spacing="5">
-                    <Label Text="{Binding title}"/>
-                    <Label Text="{Binding description}"/>
-                </VerticalStackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+                    <Frame>
+                        <Label Text="{Binding title}"/>
+                    </Frame>
 
-    </CollectionView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row ="1" Text="Add Task" Command="{Binding GoToNewTaskPageCommand}"></Button>
+    </Grid>
 
 </ContentPage>

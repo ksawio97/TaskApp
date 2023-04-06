@@ -2,8 +2,10 @@ namespace TaskApp.View;
 
 public partial class NewToDoTaskPage : ContentPage
 {
-	public NewToDoTaskPage()
+	public NewToDoTaskPage(NewToDoTaskViewModel viewModel)
 	{
 		InitializeComponent();
+
+		BindingContext = viewModel;
 	}
 }

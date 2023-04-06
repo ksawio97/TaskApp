@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:viewmodel="clr-namespace:TaskApp.ViewModel"
+             x:DataType="viewmodel:ToDoTaskDetailsViewModel"
+             x:Class="TaskApp.View.ToDoTaskDetailsPage"
+             
+             Title="{Binding title}">
+    <VerticalStackLayout>
+        <Label Text="{Binding toDoTask.title}"/>
+        <Label Text="{Binding toDoTask.description}"/>
+        <Button  
+            IsEnabled="{Binding isNotBusy}"
+            Text="OK" 
+            Command="{Binding GoBackCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

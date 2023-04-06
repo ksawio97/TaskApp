@@ -13,17 +13,37 @@ public class ToDoTaskViewModel : BaseViewModel
         this.toDoTaskService = toDoTaskService;
 
         GetToDoTasksAsync();
-        GetToDoTasksCommand = new Command(async () => await GetToDoTasksAsync());
         GoToNewTaskPageCommand = new Command(async () => await GoToNewToDoTaskPageAsync());
+        GoToToDoTaskDetailsCommand = new Command<ToDoTask>(async (ToDoTask toDoTask) => await GoToToDoTaskDetailsAsync(toDoTask));
     }
-
-    public Command GetToDoTasksCommand { get; }
 
     public Command GoToNewTaskPageCommand { get; }
 
+    public Command<ToDoTask> GoToToDoTaskDetailsCommand { get; }
+
+    async Task GoToToDoTaskDetailsAsync(ToDoTask toDoTask)
+    {
+        if (isBusy)
+            return;
+
+        isBusy = true;
+        if (toDoTask is null)
+            return;
+        await Shell.Current.GoToAsync($"{nameof(ToDoTaskDetailsPage)}", true,
+            new Dictionary<string, object>
+            {
+                { "toDoTask", toDoTask }
+            });
+        isBusy = false;
+    }
     async Task GoToNewToDoTaskPageAsync()
     {
+        if (isBusy)
+            return;
+
+        isBusy = true;
         await Shell.Current.GoToAsync($"{nameof(NewToDoTaskPage)}");
+        isBusy = false;
     }
     async Task GetToDoTasksAsync()
     {

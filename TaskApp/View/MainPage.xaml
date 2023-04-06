@@ -8,18 +8,28 @@
              Title="{Binding title}">
     
     <Grid RowDefinitions="*, auto">
-        <CollectionView Grid.Row = "0" ItemsSource ="{Binding toDoTasks}">
+        <CollectionView Grid.Row = "0" 
+                        ItemsSource ="{Binding toDoTasks}"
+                        SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ToDoTask">
 
                     <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToDoTaskViewModel}}, Path=GoToToDoTaskDetailsCommand}"/>
+                        </Frame.GestureRecognizers>
                         <Label Text="{Binding title}"/>
                     </Frame>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row ="1" Text="Add Task" Command="{Binding GoToNewTaskPageCommand}"></Button>
+        <Button 
+            IsEnabled="{Binding isNotBusy}"
+            Grid.Row ="1" 
+            Text="Add Task" 
+            Command="{Binding GoToNewTaskPageCommand}"/>
     </Grid>
 
 </ContentPage>

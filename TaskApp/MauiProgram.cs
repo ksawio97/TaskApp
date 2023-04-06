@@ -18,7 +18,12 @@ public static class MauiProgram
 		builder.Services.AddSingleton<ToDoTaskService>();
         builder.Services.AddSingleton<ToDoTaskViewModel>();
         builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddSingleton<NewToDoTaskPage>();
+
+        builder.Services.AddTransient<NewToDoTaskViewModel>();
+        builder.Services.AddTransient<NewToDoTaskPage>();
+
+        builder.Services.AddTransient<ToDoTaskDetailsViewModel>();
+        builder.Services.AddTransient<ToDoTaskDetailsPage>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

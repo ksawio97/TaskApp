@@ -7,20 +7,30 @@
              x:Class="TaskApp.View.NewToDoTaskPage"
              
              Title="{Binding title}">
-    <VerticalStackLayout>
+
+    <Shell.TitleView>
+        <Grid Style="{StaticResource TitleGrid}">
+            <Label Text="{Binding title}" Style="{DynamicResource TitleLabel}"/>
+            <ImageButton Style="{DynamicResource TitleImageButton}" Command="{Binding ChangeThemeCommand}" IsEnabled="{Binding isNotBusy}"/>
+        </Grid>
+    </Shell.TitleView>
+    
+    <Grid RowDefinitions="*, 8*, *">
         <Entry 
+            Grid.Row="0"
             Placeholder="Title" 
             Text="{Binding taskTitle}"
             MaxLength="50"/>
         <Editor
+            Grid.Row="1"
             Placeholder="Description"
             Text="{Binding taskDescription}"
-            MaxLength="200"
-            AutoSize="TextChanges"
-            MaximumHeightRequest="350"/>
+            MaxLength="1000"
+            AutoSize="TextChanges"/>
         <Button 
+            Grid.Row="2"
             IsEnabled="{Binding isNotBusy}"
             Text="Confirm" 
             Command="{Binding AddToDoTaskCommand}"/>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

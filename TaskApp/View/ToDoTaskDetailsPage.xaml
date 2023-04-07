@@ -7,12 +7,27 @@
              x:Class="TaskApp.View.ToDoTaskDetailsPage"
              
              Title="{Binding title}">
-    <VerticalStackLayout>
-        <Label Text="{Binding toDoTask.title}"/>
-        <Label Text="{Binding toDoTask.description}"/>
+
+    <Shell.TitleView>
+        <Grid Style="{StaticResource TitleGrid}">
+            <Label Text="{Binding title}" Style="{DynamicResource TitleLabel}"/>
+            <ImageButton Style="{DynamicResource TitleImageButton}" Command="{Binding ChangeThemeCommand}" IsEnabled="{Binding isNotBusy}"/>
+        </Grid>
+    </Shell.TitleView>
+    
+    <Grid RowDefinitions="*, 8*, *">
+        <Label 
+            Grid.Row="0"
+            Text="{Binding toDoTask.title}"
+            Style="{DynamicResource DetailsLabel}"/>
+        <Label 
+            Grid.Row="1"
+            Text="{Binding toDoTask.description}"
+            Style="{DynamicResource DetailsLabel}"/>
         <Button  
+            Grid.Row="2"
             IsEnabled="{Binding isNotBusy}"
             Text="OK" 
             Command="{Binding GoBackCommand}"/>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

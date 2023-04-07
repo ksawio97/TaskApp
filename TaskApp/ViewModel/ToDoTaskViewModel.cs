@@ -15,6 +15,15 @@ public class ToDoTaskViewModel : BaseViewModel
         GetToDoTasksAsync();
         GoToNewTaskPageCommand = new Command(async () => await GoToNewToDoTaskPageAsync());
         GoToToDoTaskDetailsCommand = new Command<ToDoTask>(async (ToDoTask toDoTask) => await GoToToDoTaskDetailsAsync(toDoTask));
+        ChangeThemeCommand =
+            new Command(() =>
+            {
+                if (isBusy)
+                    return;
+                isBusy = true;
+                TitleViewActions.ChangeTheme();
+                isBusy = false;
+            });
     }
 
     public Command GoToNewTaskPageCommand { get; }

@@ -35,6 +35,15 @@ public class NewToDoTaskViewModel :BaseViewModel
         title = "Create new ToDoTask";
 
         AddToDoTaskCommand = new Command(async () => await AddToDoTaskAsync());
+        ChangeThemeCommand = 
+            new Command(() => 
+            {
+                if (isBusy)
+                    return;
+                isBusy = true;
+                TitleViewActions.ChangeTheme();
+                isBusy = false;
+            });
     }
 
     public Command AddToDoTaskCommand { get; }

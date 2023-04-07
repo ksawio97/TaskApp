@@ -34,6 +34,8 @@ public class BaseViewModel : INotifyPropertyChanged
         }
     }
 
+    public Command ChangeThemeCommand { get; protected set; }
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     //gets caller name in this case isBusy or title if didn't set value

@@ -6,8 +6,15 @@
              x:DataType="viewmodel:ToDoTaskViewModel"
              x:Class="TaskApp.View.MainPage"
              Title="{Binding title}">
-    
-    <Grid RowDefinitions="*, auto">
+
+    <Shell.TitleView>
+        <Grid Style="{StaticResource TitleGrid}">
+            <Label Text="{Binding title}" Style="{DynamicResource TitleLabel}"/>
+            <ImageButton Style="{DynamicResource TitleImageButton}" Command="{Binding ChangeThemeCommand}" IsEnabled="{Binding isNotBusy}"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="9*, *">
         <CollectionView Grid.Row = "0" 
                         ItemsSource ="{Binding toDoTasks}"
                         SelectionMode="None">
@@ -19,7 +26,9 @@
                             <TapGestureRecognizer CommandParameter="{Binding .}"
                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToDoTaskViewModel}}, Path=GoToToDoTaskDetailsCommand}"/>
                         </Frame.GestureRecognizers>
-                        <Label Text="{Binding title}"/>
+                        <Label 
+                            Text="{Binding title}"
+                            Style="{DynamicResource PreviewLabel}"/>
                     </Frame>
 
                 </DataTemplate>

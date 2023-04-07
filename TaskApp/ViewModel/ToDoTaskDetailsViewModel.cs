@@ -16,8 +16,17 @@ public class ToDoTaskDetailsViewModel : BaseViewModel
     }
     public ToDoTaskDetailsViewModel()
     {
-        title = "Edit Task";
+        title = "Details";
         GoBackCommand = new Command(async () => await GoBackAsync());
+        ChangeThemeCommand =
+            new Command(() =>
+            {
+                if (isBusy)
+                    return;
+                isBusy = true;
+                TitleViewActions.ChangeTheme();
+                isBusy = false;
+            });
     }
 
     public Command GoBackCommand { get; }

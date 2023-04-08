@@ -9,7 +9,9 @@
 
     <Shell.TitleView>
         <Grid Style="{StaticResource TitleGrid}">
-            <Label Text="{Binding title}" Style="{DynamicResource TitleLabel}"/>
+            <Label 
+                Text="{Binding title}" 
+                Style="{DynamicResource TitleLabel}"/>
             <ImageButton Style="{DynamicResource TitleImageButton}" Command="{Binding ChangeThemeCommand}" IsEnabled="{Binding isNotBusy}"/>
         </Grid>
     </Shell.TitleView>

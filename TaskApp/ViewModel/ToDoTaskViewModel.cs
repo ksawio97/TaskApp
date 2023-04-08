@@ -4,8 +4,12 @@ namespace TaskApp.ViewModel;
 
 public class ToDoTaskViewModel : BaseViewModel
 {
-    ToDoTaskService toDoTaskService;
+    public ToDoTaskService toDoTaskService { get; private set; }
+
     public ObservableCollection<ToDoTask> toDoTasks { get; } = new ();
+
+    //event may be usefull in future
+    public EventHandler<ToDoTasksCollectionChangedEventArgs> toDoTasksCollectionChanged;
 
     public ToDoTaskViewModel(ToDoTaskService toDoTaskService)
     {
@@ -24,6 +28,7 @@ public class ToDoTaskViewModel : BaseViewModel
                 TitleViewActions.ChangeTheme();
                 isBusy = false;
             });
+        toDoTasksCollectionChanged += async (sender, toDoTask) => { await toDoTaskService.SaveToDoTasks(toDoTasks); };
     }
 
     public Command GoToNewTaskPageCommand { get; }
@@ -65,9 +70,10 @@ public class ToDoTaskViewModel : BaseViewModel
 
             if (this.toDoTasks.Count != 0)
                 this.toDoTasks.Clear();
-
-            foreach (var toDoTask in toDoTasks)
-                this.toDoTasks.Add(toDoTask);
+            
+            if (toDoTasks.Count != 0)
+                foreach (var toDoTask in toDoTasks)
+                    this.toDoTasks.Add(toDoTask);
         }
         catch (Exception ex)
         {
@@ -80,4 +86,3 @@ public class ToDoTaskViewModel : BaseViewModel
         }
     }
 }
-

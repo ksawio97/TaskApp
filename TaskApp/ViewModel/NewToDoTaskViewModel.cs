@@ -54,13 +54,17 @@ public class NewToDoTaskViewModel :BaseViewModel
         isBusy = true;
 
         if (!string.IsNullOrEmpty(taskTitle))
-            _ToDoTaskViewModel.toDoTasks.Add(
-                new ToDoTask 
-                { 
-                    title = taskTitle, 
-                    description = taskDescription 
-                });
+        {
+            var toDoTask = new ToDoTask
+            {
+                title = taskTitle,
+                description = taskDescription
+            };
+            _ToDoTaskViewModel.toDoTasks.Add(toDoTask);
 
+            var args = new ToDoTasksCollectionChangedEventArgs(toDoTask: toDoTask);
+            _ToDoTaskViewModel.toDoTasksCollectionChanged(this, args);
+        }
         await Shell.Current.GoToAsync("..", true);
         isBusy = false;
     }

@@ -24,13 +24,24 @@
                 <DataTemplate x:DataType="model:ToDoTask">
 
                     <Frame>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer CommandParameter="{Binding .}"
-                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToDoTaskViewModel}}, Path=GoToToDoTaskDetailsCommand}"/>
-                        </Frame.GestureRecognizers>
-                        <Label 
-                            Text="{Binding title}"
-                            Style="{DynamicResource PreviewLabel}"/>
+                        <Grid ColumnDefinitions="9*, 1*" RowDefinitions="30">
+                            <Label 
+                                Grid.Column="0"
+                                Text="{Binding title}"
+                                Style="{DynamicResource PreviewLabel}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToDoTaskViewModel}}, Path=GoToToDoTaskDetailsCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            
+                            <ImageButton
+                                Grid.Column="1"
+                                Source="delete.png"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToDoTaskViewModel}}, Path=DeleteTaskCommand}"
+                                CommandParameter="{Binding .}"/> 
+                        </Grid>
                     </Frame>
 
                 </DataTemplate>

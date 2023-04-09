@@ -17,23 +17,30 @@ public class ToDoTaskViewModel : BaseViewModel
         this.toDoTaskService = toDoTaskService;
 
         GetToDoTasksAsync();
+
         GoToNewTaskPageCommand = new Command(async () => await GoToNewToDoTaskPageAsync());
         GoToToDoTaskDetailsCommand = new Command<ToDoTask>(async (ToDoTask toDoTask) => await GoToToDoTaskDetailsAsync(toDoTask));
-        ChangeThemeCommand =
-            new Command(() =>
-            {
-                if (isBusy)
-                    return;
-                isBusy = true;
-                TitleViewActions.ChangeTheme();
-                isBusy = false;
-            });
+        ChangeThemeCommand = new Command(() => { TitleViewActions.ChangeTheme(); } );
+        DeleteTaskCommand = new Command<ToDoTask>(DeleteTask);
+
         toDoTasksCollectionChanged += async (sender, toDoTask) => { await toDoTaskService.SaveToDoTasks(toDoTasks); };
     }
 
     public Command GoToNewTaskPageCommand { get; }
 
+    public Command<ToDoTask> DeleteTaskCommand { get; }
+
     public Command<ToDoTask> GoToToDoTaskDetailsCommand { get; }
+
+    void DeleteTask(ToDoTask toDoTask)
+    {
+        if (toDoTasks.Contains(toDoTask))
+        {
+            toDoTasks.Remove(toDoTask);
+            var args = new ToDoTasksCollectionChangedEventArgs(toDoTask: toDoTask);
+            toDoTasksCollectionChanged(this, args);
+        }
+    }
 
     async Task GoToToDoTaskDetailsAsync(ToDoTask toDoTask)
     {

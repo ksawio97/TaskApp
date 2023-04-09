@@ -20,7 +20,7 @@
             Grid.Row="0"
             Placeholder="Title" 
             Text="{Binding taskTitle}"
-            MaxLength="50"/>
+            MaxLength="29"/>
         <Editor
             Grid.Row="1"
             Placeholder="Description"

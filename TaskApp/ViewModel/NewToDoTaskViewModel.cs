@@ -1,4 +1,6 @@
-﻿namespace TaskApp.ViewModel;
+﻿using System.Collections.ObjectModel;
+
+namespace TaskApp.ViewModel;
 
 public class NewToDoTaskViewModel :BaseViewModel
 {
@@ -53,13 +55,16 @@ public class NewToDoTaskViewModel :BaseViewModel
             return;
         isBusy = true;
 
+        var getHighestNotificationId = (ObservableCollection<ToDoTask> toDoTasks) => toDoTasks.Count == 0 ? NotificationService.lowestNotificationId : toDoTasks[toDoTasks.Count - 1].notificationId;
         if (!string.IsNullOrEmpty(taskTitle))
         {
             var toDoTask = new ToDoTask
             {
                 title = taskTitle,
-                description = taskDescription
+                description = taskDescription,
+                notificationId = getHighestNotificationId(_ToDoTaskViewModel.toDoTasks) + 1
             };
+
             _ToDoTaskViewModel.toDoTasks.Add(toDoTask);
 
             var args = new ToDoTasksCollectionChangedEventArgs(toDoTask: toDoTask);

@@ -23,7 +23,7 @@ public class ToDoTaskViewModel : BaseViewModel
         ChangeThemeCommand = new Command(() => { TitleViewActions.ChangeTheme(); } );
         DeleteTaskCommand = new Command<ToDoTask>(DeleteTask);
 
-        toDoTasksCollectionChanged += async (sender, toDoTask) => { await toDoTaskService.SaveToDoTasks(toDoTasks); };
+        toDoTasksCollectionChanged += async (sender, args) => { await toDoTaskService.SaveToDoTasks(toDoTasks); };
     }
 
     public Command GoToNewTaskPageCommand { get; }

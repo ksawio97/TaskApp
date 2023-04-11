@@ -19,6 +19,10 @@ public static class NotificationService
     {
         if (toDoTasks.Count <= 0 || ! await LocalNotificationCenter.Current.AreNotificationsEnabled())
             return;
+
+        foreach (var toDoTask in toDoTasks)
+            await AddNotification(toDoTask);
+
         var notificationGroup = new NotificationRequest
         {
             NotificationId = lowestNotificationId,
@@ -30,9 +34,6 @@ public static class NotificationService
             }
         };
         await LocalNotificationCenter.Current.Show(notificationGroup);
-
-        foreach (var toDoTask in toDoTasks)
-            await AddNotification(toDoTask);
     }
 
     public static async Task AddNotification(ToDoTask toDoTask)
@@ -53,7 +54,7 @@ public static class NotificationService
 
     public static async Task ClearNotifications()
     {
-        if (!await LocalNotificationCenter.Current.AreNotificationsEnabled())
+        if (await LocalNotificationCenter.Current.AreNotificationsEnabled())
             LocalNotificationCenter.Current.ClearAll();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Plugin.LocalNotification;
+using System.Collections.ObjectModel;
 
 namespace TaskApp.ViewModel;
 
@@ -91,5 +92,8 @@ public class ToDoTaskViewModel : BaseViewModel
         {
             isBusy = false;
         }
+
+        if (!await LocalNotificationCenter.Current.AreNotificationsEnabled())
+            await Shell.Current.DisplayAlert("Notifications error", "Enable notifications", "OK");
     }
 }

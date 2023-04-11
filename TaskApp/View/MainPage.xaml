@@ -5,8 +5,12 @@
              xmlns:viewmodel="clr-namespace:TaskApp.ViewModel"
              x:DataType="viewmodel:ToDoTaskViewModel"
              x:Class="TaskApp.View.MainPage"
+            xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Title="{Binding title}">
-
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource FramePrimaryBackground}, Dark={StaticResource DarkFramePrimaryBackground}}" StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark= LightContent}"/>
+    </Page.Behaviors>
+    
     <Shell.TitleView>
         <Grid Style="{StaticResource TitleGrid}">
             <Label 

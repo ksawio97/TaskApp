@@ -14,13 +14,13 @@
             <!--<ImageButton Style="{DynamicResource TitleImageButton}" Command="{Binding ChangeThemeCommand}" IsEnabled="{Binding isNotBusy}"/>-->
         </Grid>
     </Shell.TitleView>
-    
+
     <Grid RowDefinitions="*, 8*, *">
         <Entry 
-            Grid.Row="0"
-            Placeholder="Title" 
-            Text="{Binding taskTitle}"
-            MaxLength="29"/>
+                Grid.Row="0"
+                Placeholder="Title" 
+                Text="{Binding taskTitle}"
+                MaxLength="29"/>
         <Editor
             Grid.Row="1"
             Placeholder="Description"

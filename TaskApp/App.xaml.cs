@@ -2,7 +2,7 @@
 
 public partial class App : Application
 {
-	public App(ToDoTaskViewModel view)
+	public App()
 	{
 		InitializeComponent();
 

@@ -2,7 +2,7 @@
 using Microsoft.Maui.LifecycleEvents;
 using Plugin.LocalNotification;
 using System.Collections.ObjectModel;
-
+using CommunityToolkit.Maui;
 namespace TaskApp;
 
 public static class MauiProgram
@@ -14,6 +14,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.UseLocalNotification()
 			.ConfigureFonts(fonts =>
 			{

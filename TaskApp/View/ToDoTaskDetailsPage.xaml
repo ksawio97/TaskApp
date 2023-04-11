@@ -22,6 +22,7 @@
             Style="{DynamicResource DetailsLabel}"/>
         <Label 
             Grid.Row="1"
+            x:Name="Description"
             Text="{Binding toDoTask.description}"
             Style="{DynamicResource DetailsLabel}"/>
         <Button  
